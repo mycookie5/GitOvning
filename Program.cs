@@ -1,7 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System;
-
 public class Person
 {
     // Egenskaper som andra klasser kan ärva
@@ -9,9 +7,10 @@ public class Person
     public string Name { get; set; }
 
     // konstrukter: Det första som initieras när man skapar en objeckt.
-    public Person(int age, string namn) 
+
+    public Person(string name, int age)
     {
-        Name = namn;
+        Name = name;
         Age = age;
     }
 
@@ -23,10 +22,30 @@ public class Person
 
 public class Student : Person
 {
-    public string grade { get; set; }
+    public int ID { get; set; }
+    public string Grade { get; set; }
 
-    public Student(string grade)
+    // base visar att man ärver variablerna från bas klassen Person.
+    public Student (string name, int age, int id, string grade) : base (name, age)
     {
-        this.grade = grade;
+        ID = id;
+        Grade = grade;
+        Name = name;
+        Age = age;
+    }
+
+    public void DisplayStudentInfo()
+    {
+        DisplayInfo();
+        Console.WriteLine($"ID: {ID} Grade: {Grade}");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Student studentK = new Student("Fanual", 22, 2174128, "MVG");
+        studentK.DisplayStudentInfo();
     }
 }
